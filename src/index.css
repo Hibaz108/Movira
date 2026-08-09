@@ -128,4 +128,10 @@
   html {
     @apply font-sans;
   }
+  button {
+    @apply cursor-pointer;
+  }
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
 }

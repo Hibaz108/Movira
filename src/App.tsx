@@ -1,5 +1,35 @@
+// react router
+import { Routes, Route } from "react-router-dom"; 
+// components
+import Header from "./components/layout/Header";
+//pages
+import Home from "./pages/Home";
+import Trending from "./pages/Trending";
+import Discover from "./pages/Discover";
+import Genres from "./pages/Genres";
+import Search from "./pages/Search";
+import Favorites from "./pages/Favorites";
+import Watchlist from "./pages/Watchlist";
+// hooks
+import { useTheme } from "./hooks/useTheme";
+
 function App() {
-  return <>App</>;
+  useTheme();
+  return (
+    <div className="min-h-svh">
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/trending" element={<Trending />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/genres" element={<Genres />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/watchlist" element={<Watchlist />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
