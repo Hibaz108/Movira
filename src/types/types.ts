@@ -7,3 +7,8 @@ export type Genre = {
   id: number;
   name: string;
 };
+
+export type ErrorMessageProps = {
+  error?: Error | null;
+  onRetry?: () => void;
+};

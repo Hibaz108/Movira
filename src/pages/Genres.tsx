@@ -1,9 +1,14 @@
 import { genreColors } from "@/lib/genreColors";
 import Title from "@/components/common/Title";
 import { useGenres } from "@/hooks/useGenres";
+import Loader from "@/components/common/Loader";
+import ErrorMessage from "@/components/common/ErrorMessage";
 
 const Genres = () => {
-  const { data } = useGenres();
+  const { data, isLoading, error, refetch } = useGenres();
+
+  if (isLoading) return <Loader />;
+  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
 
   return (
     <section className="min-h-svh my-4">
