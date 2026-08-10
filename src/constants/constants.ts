@@ -12,3 +12,6 @@ export const ACTION_LINKS = [
   { name: "Favorites", path: "/favorites", icon: Heart },
   { name: "Watchlist", path: "/watchlist", icon: Bookmark },
 ] as const;
+
+export const API_KEY = import.meta.env.VITE_API_KEY;
+export const BASE_URL = "https://api.themoviedb.org/3";
