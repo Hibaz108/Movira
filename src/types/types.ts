@@ -66,3 +66,10 @@ export type EmptyStateProps = {
   buttonLabel: string;
   buttonLink: string;
 };
+
+export type IconBadgeLinkProps = {
+  to: string;
+  label: string;
+  count: number;
+  Icon: LucideIcon;
+};
