@@ -32,3 +32,16 @@ export const getTrendingMovies = async (
   }
   return data;
 };
+
+export const getTopRatedMovies = async (page: number = 1): Promise<Movies> => {
+  const response = await fetch(
+    `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&page=${page}`,
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.status_message || "Failed to fetch top rated movies");
+  }
+  return data;
+};
