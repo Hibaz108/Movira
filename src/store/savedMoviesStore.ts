@@ -6,6 +6,7 @@ export const useSavedMoviesStore = create<SavedMoviesStore>()(
   persist(
     (set) => ({
       favorites: [],
+      watchlist: [],
       addToFavorites: (movie) => {
         set((state) => {
           if (state.favorites.some((m) => m.id === movie.id)) {
@@ -20,6 +21,22 @@ export const useSavedMoviesStore = create<SavedMoviesStore>()(
       removeFromFavorites: (id) => {
         set((state) => ({
           favorites: state.favorites.filter((movie) => movie.id !== id),
+        }));
+      },
+      addToWatchlist: (movie) => {
+        set((state) => {
+          if (state.watchlist.some((m) => m.id === movie.id)) {
+            return state;
+          }
+          return {
+            watchlist: [...state.watchlist, movie],
+          };
+        });
+      },
+
+      removeFromWatchlist: (id) => {
+        set((state) => ({
+          watchlist: state.watchlist.filter((movie) => movie.id !== id),
         }));
       },
     }),

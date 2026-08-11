@@ -18,10 +18,17 @@ const MovieCard = ({
   genreIds,
   genresList,
 }: MovieCardProps) => {
-  const { favorites, addToFavorites, removeFromFavorites } =
-    useSavedMoviesStore();
+  const {
+    favorites,
+    addToFavorites,
+    removeFromFavorites,
+    watchlist,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useSavedMoviesStore();
 
   const isFavorite = favorites.some((movie) => movie.id === id);
+  const isInWatchlist = watchlist.some((movie) => movie.id === id);
   const genres = getMoviesGenres(genreIds, genresList);
 
   return (
@@ -54,9 +61,23 @@ const MovieCard = ({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              if (isInWatchlist) {
+                removeFromWatchlist(id);
+              } else {
+                addToWatchlist({
+                  title,
+                  posterPath,
+                  releaseYear,
+                  id,
+                  genreIds,
+                });
+              }
             }}
           >
-            <BookmarkPlus className="size-4" strokeWidth={3} />
+            <BookmarkPlus
+              className={`size-4 ${isInWatchlist ? "fill-primary stroke-primary" : "fill-transparent"}`}
+              strokeWidth={3}
+            />
           </button>
 
           <button

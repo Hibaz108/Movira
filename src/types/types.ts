@@ -54,6 +54,9 @@ export type SavedMoviesStore = {
   favorites: SavedMovie[];
   addToFavorites: (movie: SavedMovie) => void;
   removeFromFavorites: (id: number) => void;
+  watchlist: SavedMovie[];
+  addToWatchlist: (movie: SavedMovie) => void;
+  removeFromWatchlist: (id: number) => void;
 };
 
 export type EmptyStateProps = {
