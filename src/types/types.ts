@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export type ThemeStore = {
   theme: "dark" | "light";
   toggleTheme: () => void;
@@ -20,7 +22,7 @@ export type Movie = {
   overview: string;
   poster_path: string | null;
   genre_ids: number[];
-  release_date: string ;
+  release_date: string;
   vote_average: number;
 };
 
@@ -38,4 +40,36 @@ export type MovieCardProps = {
   releaseYear: string;
   genreIds: number[];
   genresList: Genre[];
+};
+
+export type SavedMovie = {
+  id: number;
+  title: string;
+  posterPath: string | null;
+  releaseYear: string;
+  genreIds: number[];
+};
+
+export type SavedMoviesStore = {
+  favorites: SavedMovie[];
+  addToFavorites: (movie: SavedMovie) => void;
+  removeFromFavorites: (id: number) => void;
+  watchlist: SavedMovie[];
+  addToWatchlist: (movie: SavedMovie) => void;
+  removeFromWatchlist: (id: number) => void;
+};
+
+export type EmptyStateProps = {
+  Icon: LucideIcon;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  buttonLink: string;
+};
+
+export type IconBadgeLinkProps = {
+  to: string;
+  label: string;
+  count: number;
+  Icon: LucideIcon;
 };

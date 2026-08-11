@@ -1,7 +1,9 @@
-// react & hooks
+// React & hooks
 import { useState } from "react";
-// react router
+// React Router
 import { Link, NavLink } from "react-router-dom";
+// components
+import IconBadgeLink from "../common/IconBadgeLink";
 // icons
 import {
   Film,
@@ -15,6 +17,7 @@ import {
 } from "lucide-react";
 // stores
 import { useThemeStore } from "@/store/themeStore";
+import { useSavedMoviesStore } from "@/store/savedMoviesStore";
 //constants
 import { NAV_LINKS, ACTION_LINKS } from "@/constants/constants";
 
@@ -22,6 +25,8 @@ const Header = () => {
   const theme = useThemeStore((state) => state.theme);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
   const [open, setOpen] = useState<boolean>(false);
+  const favorites = useSavedMoviesStore((state) => state.favorites);
+  const watchlist = useSavedMoviesStore((state) => state.watchlist);
 
   return (
     <header className="sticky top-0 z-30 bg-background/90">
@@ -60,13 +65,19 @@ const Header = () => {
             <Search className="size-5" aria-hidden="true" />
           </Link>
 
-          <Link to="/favorites" aria-label="Favorites">
-            <Heart className="size-5" aria-hidden="true" />
-          </Link>
+          <IconBadgeLink
+            to="/favorites"
+            label="Favorites"
+            count={favorites.length}
+            Icon={Heart}
+          />
 
-          <Link to="/watchlist" aria-label="Watchlist">
-            <Bookmark className="size-5" aria-hidden="true" />
-          </Link>
+          <IconBadgeLink
+            to="/watchlist"
+            label="Watchlist"
+            count={watchlist.length}
+            Icon={Bookmark}
+          />
 
           <button
             type="button"
@@ -146,7 +157,10 @@ const Header = () => {
                 <button
                   type="button"
                   className="flex items-center gap-2 text-lg text-foreground"
-                  onClick={toggleTheme}
+                  onClick={() => {
+                    toggleTheme();
+                    setOpen(false);
+                  }}
                 >
                   {theme === "light" ? (
                     <Moon className="size-5" aria-hidden="true" />
