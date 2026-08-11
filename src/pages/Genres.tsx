@@ -1,8 +1,10 @@
-import { genreColors } from "@/lib/genreColors";
+// components
 import Title from "@/components/common/Title";
-import { useGenres } from "@/hooks/useGenres";
 import Loader from "@/components/common/Loader";
 import ErrorMessage from "@/components/common/ErrorMessage";
+// other
+import { genreColors } from "@/lib/genreColors";
+import { useGenres } from "@/hooks/useGenres";
 
 const Genres = () => {
   const { data, isLoading, error, refetch } = useGenres();
