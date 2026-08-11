@@ -13,6 +13,7 @@ import Favorites from "./pages/Favorites";
 import Watchlist from "./pages/Watchlist";
 import MovieDetails from "./pages/MovieDetails";
 import TopRated from "./pages/TopRated";
+import NotFound from "./pages/NotFound";
 // hooks
 import { useTheme } from "./hooks/useTheme";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/top-rated" element={<TopRated />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
