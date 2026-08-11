@@ -14,13 +14,13 @@ export type ErrorMessageProps = {
 };
 
 export type Movie = {
-  backdrop_path: string;
+  backdrop_path: string | null;
   id: number;
   title: string;
   overview: string;
-  poster_path: string;
+  poster_path: string | null;
   genre_ids: number[];
-  release_date: string;
+  release_date: string ;
   vote_average: number;
 };
 
@@ -29,4 +29,13 @@ export type Movies = {
   results: Movie[];
   total_pages: number;
   total_results: number;
+};
+
+export type MovieCardProps = {
+  id: number;
+  title: string;
+  posterPath: string | null;
+  releaseYear: string;
+  genreIds: number[];
+  genresList: Genre[];
 };

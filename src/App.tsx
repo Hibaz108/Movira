@@ -11,6 +11,7 @@ import Genres from "./pages/Genres";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import Watchlist from "./pages/Watchlist";
+import MovieDetails from "./pages/MovieDetails";
 // hooks
 import { useTheme } from "./hooks/useTheme";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
         </Routes>
       </main>
 
