@@ -20,10 +20,7 @@ const ErrorMessage = ({ error, onRetry }: ErrorMessageProps) => {
       </p>
 
       {onRetry && (
-        <button
-          onClick={onRetry}
-          className="py-2 px-8 mt-4 bg-primary text-black font-medium rounded-full hover:scale-105 transition-transform"
-        >
+        <button onClick={onRetry} className="btn-primary">
           Try again
         </button>
       )}

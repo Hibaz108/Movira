@@ -9,7 +9,7 @@ const EmptyState = ({
   buttonLink,
 }: EmptyStateProps) => {
   return (
-    <div className="min-h-96 flex flex-col justify-center items-center gap-2 mt-6 p-4 bg-card text-center rounded-2xl">
+    <div className="min-h-96 flex flex-col justify-center items-center gap-4 mt-6 p-4 bg-card text-center rounded-2xl">
       <span className="text-muted">
         <Icon className="size-14" strokeWidth={3} />
       </span>
@@ -18,10 +18,7 @@ const EmptyState = ({
       </h3>
       <p className="text-muted">{description}</p>
 
-      <Link
-        to={buttonLink}
-        className="py-2 px-6 mt-4 bg-primary font-semibold text-black rounded-full hover:scale-105 "
-      >
+      <Link to={buttonLink} className="btn-primary">
         {buttonLabel}
       </Link>
     </div>

@@ -1,31 +1,30 @@
 // components
 import Title from "@/components/common/Title";
-import ErrorMessage from "@/components/common/ErrorMessage";
-import Loader from "@/components/common/Loader";
 import MovieCard from "@/components/movie/MovieCard";
+import Loader from "@/components/common/Loader";
+import ErrorMessage from "@/components/common/ErrorMessage";
 // hooks
-import { useState } from "react";
-import { useTrendingMovies } from "@/hooks/useTrending";
-import { useGenres } from "@/hooks/useGenres";
+import { useTopRatedMovies } from "@/hooks/useTopRated";
 import { useInfiniteScrollTrigger } from "@/hooks/useInfiniteScrollTrigger";
+import { useGenres } from "@/hooks/useGenres";
 // shadcn
 import { Spinner } from "@/components/ui/spinner";
 // other
 import { getReleaseYear } from "@/lib/movies";
 
-const Trending = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState<"day" | "week">("week");
+const TopRated = () => {
   const {
     data,
     error,
-    refetch,
     isLoading,
+    refetch,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useTrendingMovies(selectedPeriod);
-  const { data: genres } = useGenres();
+  } = useTopRatedMovies();
+
   const movies = data?.pages.flatMap((page) => page.results) ?? [];
+  const { data: genres } = useGenres();
   const loadMoreRef = useInfiniteScrollTrigger(fetchNextPage, !!hasNextPage);
 
   if (isLoading) return <Loader />;
@@ -34,30 +33,8 @@ const Trending = () => {
   return (
     <section className="min-h-svh my-4">
       <div className="container space-y-4">
-        <Title title="Trending Movies" />
-
-        {/* daily and weekly trending toggle */}
-        <div className="flex flex-col gap-3 sm:justify-between sm:items-center sm:flex-row">
-          <p className="text-muted">
-            The most popular movies being watched right now.
-          </p>
-
-          <div className="bg-surface w-fit p-1.5 text-sm text-foreground rounded-md">
-            <button
-              className={`py-2 px-3 ${selectedPeriod === "day" ? "bg-background rounded-sm" : "text-muted"} transition-colors duration-500`}
-              onClick={() => setSelectedPeriod("day")}
-            >
-              Today
-            </button>
-            <button
-              className={`py-2 px-3 ${selectedPeriod === "week" ? "bg-background rounded-sm" : "text-muted"} transition-colors duration-500`}
-              onClick={() => setSelectedPeriod("week")}
-            >
-              This Week
-            </button>
-          </div>
-        </div>
-        {/* === daily and weekly trending toggle === */}
+        <Title title="Top Rated" />
+        <p className="text-muted">The highest rated movies on TMDB. </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {movies.map((movie) => {
@@ -90,4 +67,4 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default TopRated;
