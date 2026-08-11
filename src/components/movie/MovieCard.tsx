@@ -8,6 +8,7 @@ import { IMG_BASE_URL } from "@/constants/constants";
 import { BookmarkPlus, Heart } from "lucide-react";
 // other
 import { getMoviesGenres } from "@/lib/movies";
+import { useSavedMoviesStore } from "@/store/savedMoviesStore";
 
 const MovieCard = ({
   title,
@@ -17,6 +18,10 @@ const MovieCard = ({
   genreIds,
   genresList,
 }: MovieCardProps) => {
+  const { favorites, addToFavorites, removeFromFavorites } =
+    useSavedMoviesStore();
+
+  const isFavorite = favorites.some((movie) => movie.id === id);
   const genres = getMoviesGenres(genreIds, genresList);
 
   return (
@@ -60,9 +65,23 @@ const MovieCard = ({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              if (isFavorite) {
+                removeFromFavorites(id);
+              } else {
+                addToFavorites({
+                  title,
+                  posterPath,
+                  releaseYear,
+                  id,
+                  genreIds,
+                });
+              }
             }}
           >
-            <Heart strokeWidth={3} className="size-4" />
+            <Heart
+              strokeWidth={3}
+              className={`size-4 ${isFavorite ? "fill-primary stroke-primary" : "fill-transparent"}`}
+            />
           </button>
         </div>
       </div>
