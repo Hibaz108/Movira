@@ -37,7 +37,10 @@ const Search = () => {
     isFetchingNextPage,
   } = useSearchMovies(debouncedQuery);
   const searchResults = data?.pages.flatMap((page) => page.results) ?? [];
-  const loadMoreRef = useInfiniteScrollTrigger(fetchNextPage, !!hasNextPage);
+  const loadMoreRef = useInfiniteScrollTrigger(
+    fetchNextPage,
+    !!hasNextPage && !isFetchingNextPage,
+  );
 
   return (
     <section className="min-h-svh mt-16 mb-6 ">
@@ -61,12 +64,13 @@ const Search = () => {
             </h2>
             <div className="flex flex-wrap items-center gap-3">
               {genres?.slice(0, 9).map((genre) => (
-                <button
+                <Link
+                  to={`/discover?genres=${genre.id}`}
                   key={genre.id}
                   className="bg-card px-5 py-1.5 font-semibold text-foreground border border-border rounded-full hover:border-primary transition-colors"
                 >
                   {genre.name}
-                </button>
+                </Link>
               ))}
               <Link
                 to="/genres"

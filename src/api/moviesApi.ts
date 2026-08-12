@@ -45,3 +45,23 @@ export const getTopRatedMovies = async (page: number = 1): Promise<Movies> => {
   }
   return data;
 };
+
+export const getDiscoverMovies = async (
+  page: number = 1,
+  genres: string,
+  sort: string,
+): Promise<Movies> => {
+  const today = new Date().toISOString().split("T")[0];
+
+  const response = await fetch(
+    `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genres}&sort_by=${sort}&primary_release_date.lte=${today}&page=${page}`,
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.status_message || "Failed to fetch discover movies");
+  }
+
+  return data;
+};

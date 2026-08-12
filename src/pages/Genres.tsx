@@ -1,3 +1,5 @@
+// React Router
+import { Link } from "react-router-dom";
 // components
 import Title from "@/components/common/Title";
 import Loader from "@/components/common/Loader";
@@ -22,7 +24,8 @@ const Genres = () => {
           {data?.map((gen) => {
             const colors = genreColors[gen.name];
             return (
-              <div
+              <Link
+                to={`/discover?genres=${gen.id}`}
                 key={gen.id}
                 className="group relative w-full h-36 flex items-center justify-center rounded-2xl overflow-hidden
                  bg-card/80 text-2xl text-foreground font-semibold cursor-pointer transition-colors"
@@ -33,7 +36,7 @@ const Genres = () => {
                   } ${colors?.hover || "group-hover:bg-primary/15"} `}
                 />
                 <span className="relative z-10">{gen.name}</span>
-              </div>
+              </Link>
             );
           })}
         </div>

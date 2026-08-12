@@ -26,7 +26,10 @@ const Trending = () => {
   } = useTrendingMovies(selectedPeriod);
   const { data: genres } = useGenres();
   const movies = data?.pages.flatMap((page) => page.results) ?? [];
-  const loadMoreRef = useInfiniteScrollTrigger(fetchNextPage, !!hasNextPage);
+  const loadMoreRef = useInfiniteScrollTrigger(
+    fetchNextPage,
+    !!hasNextPage && !isFetchingNextPage,
+  );
 
   if (isLoading) return <Loader />;
   if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
