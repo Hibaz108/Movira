@@ -114,9 +114,7 @@ const MovieCard = ({
         <div className="flex justify-between gap-6 text-muted text-xs font-medium">
           <span>{releaseYear}</span>
           <span className="line-clamp-1">
-            {genres[0]}
-            {genres.length > 1 ? ", " : ""}
-            {genres[1]}
+            {genres.slice(0, 2).join(", ") || "--"}
           </span>
         </div>
       </div>

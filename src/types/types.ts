@@ -21,7 +21,7 @@ export type Movie = {
   title: string;
   overview: string;
   poster_path: string | null;
-  genre_ids: number[];
+  genre_ids?: number[];
   release_date: string;
   vote_average: number;
 };
@@ -38,7 +38,7 @@ export type MovieCardProps = {
   title: string;
   posterPath: string | null;
   releaseYear: string;
-  genreIds: number[];
+  genreIds?: number[];
   genresList: Genre[];
 };
 
