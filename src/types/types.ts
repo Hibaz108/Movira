@@ -73,3 +73,8 @@ export type IconBadgeLinkProps = {
   count: number;
   Icon: LucideIcon;
 };
+
+export type DiscoverParams = {
+  genres: string;
+  sort: string;
+};

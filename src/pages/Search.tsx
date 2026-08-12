@@ -37,7 +37,7 @@ const Search = () => {
     isFetchingNextPage,
   } = useSearchMovies(debouncedQuery);
   const searchResults = data?.pages.flatMap((page) => page.results) ?? [];
-  const loadMoreRef = useInfiniteScrollTrigger(fetchNextPage, !!hasNextPage);
+  const loadMoreRef = useInfiniteScrollTrigger(fetchNextPage, !!hasNextPage&&!isFetchingNextPage);
 
   return (
     <section className="min-h-svh mt-16 mb-6 ">

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export const useInfiniteScrollTrigger = (
-  onIntersect: () => void|Promise<unknown>,
+  onIntersect: () => void,
   enabled: boolean,
 ) => {
   const ref = useRef<HTMLDivElement | null>(null);
