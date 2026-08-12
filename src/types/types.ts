@@ -78,3 +78,24 @@ export type DiscoverParams = {
   genres: string;
   sort: string;
 };
+
+export type DiscoverMoviesProps = {
+  genres: Genre[];
+  movies: Movie[];
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
+};
+
+export type DiscoverEmptyStateProps = {
+  onReset: () => void;
+};
+
+export type DiscoverFiltersProps = {
+  genres: Genre[];
+  selectedGenreId: number[];
+  selectedSortKey: string | undefined;
+  onSortChange: (value: string) => void;
+  onGenreClick: (id: number) => void;
+  onClearGenres: () => void;
+};
