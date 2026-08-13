@@ -9,6 +9,7 @@ import { BookmarkPlus, Heart } from "lucide-react";
 // other
 import { getMoviesGenres } from "@/lib/movies";
 import { useSavedMoviesStore } from "@/store/savedMoviesStore";
+import { cn } from "@/lib/utils";
 
 const MovieCard = ({
   title,
@@ -17,6 +18,7 @@ const MovieCard = ({
   id,
   genreIds,
   genresList,
+  className,
 }: MovieCardProps) => {
   const {
     favorites,
@@ -32,7 +34,10 @@ const MovieCard = ({
   const genres = getMoviesGenres(genreIds, genresList);
 
   return (
-    <Link to={`/movie/${id}`} className="group space-y-3 cursor-pointer">
+    <Link
+      to={`/movie/${id}`}
+      className={cn("group space-y-3 cursor-pointer", className)}
+    >
       <div
         className="relative aspect-2/3 rounded-2xl overflow-hidden border border-transparent group-hover:border-primary active:border-primary
  transition-all"
@@ -69,7 +74,7 @@ const MovieCard = ({
                   posterPath,
                   releaseYear,
                   id,
-                  genreIds,
+                  genreIds: genreIds ?? [],
                 });
               }
             }}
@@ -94,7 +99,7 @@ const MovieCard = ({
                   posterPath,
                   releaseYear,
                   id,
-                  genreIds,
+                  genreIds: genreIds ?? [],
                 });
               }
             }}
