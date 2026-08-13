@@ -11,6 +11,8 @@ import TrailerModal from "@/components/common/TrailerModal";
 import CastList from "@/components/movie-details/CastList";
 import ReviewsList from "@/components/movie-details/ReviewsList";
 import RecommendationsList from "@/components/movie-details/RecommendationsList";
+import Loader from "@/components/common/Loader";
+import ErrorMessage from "@/components/common/ErrorMessage";
 // other
 import { BACKDROP_BASE_URL } from "@/constants/constants";
 
@@ -18,7 +20,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const movieId = Number(id);
   const navigate = useNavigate();
-  const { data: movie } = useMovieDetails(movieId);
+  const { data: movie, isLoading, error, refetch } = useMovieDetails(movieId);
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
   const videos = movie?.videos?.results ?? [];
   const cast = movie?.credits?.cast ?? [];
@@ -43,6 +45,9 @@ const MovieDetails = () => {
   const handleCloseTrailer = () => {
     setShowTrailer(false);
   };
+
+  if (isLoading) return <Loader />;
+  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
 
   return (
     <>
