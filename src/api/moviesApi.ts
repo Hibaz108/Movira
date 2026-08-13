@@ -1,5 +1,5 @@
 import { API_KEY, BASE_URL } from "@/constants/constants";
-import type { Movies } from "@/types/types";
+import type { Movies, MovieDetails } from "@/types/types";
 
 export const searchMovies = async (
   userQuery: string,
@@ -61,6 +61,20 @@ export const getDiscoverMovies = async (
 
   if (!response.ok) {
     throw new Error(data?.status_message || "Failed to fetch discover movies");
+  }
+
+  return data;
+};
+
+export const getMovieDetails = async (id: number): Promise<MovieDetails> => {
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits,reviews,recommendations,videos`,
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.status_message || "Failed to fetch movie details");
   }
 
   return data;

@@ -40,6 +40,7 @@ export type MovieCardProps = {
   releaseYear: string;
   genreIds?: number[];
   genresList: Genre[];
+  className?: string | undefined;
 };
 
 export type SavedMovie = {
@@ -98,4 +99,87 @@ export type DiscoverFiltersProps = {
   onSortChange: (value: string) => void;
   onGenreClick: (id: number) => void;
   onClearGenres: () => void;
+};
+
+export type MovieDetails = {
+  backdrop_path: string | null;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+
+  id: number;
+  original_language: string;
+  overview: string;
+  poster_path: string | null;
+
+  release_date: string;
+  runtime: number;
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  tagline: string;
+  title: string;
+  vote_average: number;
+
+  credits: {
+    cast: Actor[];
+  };
+
+  reviews: {
+    page: number;
+    results: Review[];
+    total_pages: number;
+    total_results: number;
+  };
+
+  recommendations: {
+    page: number;
+    results: Movie[];
+    total_pages: number;
+    total_results: number;
+  };
+
+  videos: {
+    results: Video[];
+  };
+};
+
+export type Actor = {
+  id: number;
+  name: string;
+  profile_path: string | null;
+  character: string;
+};
+
+export type Review = {
+  author: string;
+  author_details: {
+    name: string;
+    avatar_path: string | null;
+    rating: number | null;
+  };
+  content: string;
+  id: string;
+};
+
+export type Video = {
+  name: string;
+  key: string;
+  site: string;
+  type: string;
+  id: string;
+};
+
+export type Language = {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+};
+
+export type TrailerModalProps = {
+  handleCloseTrailer: () => void;
+  trailer: Video;
 };

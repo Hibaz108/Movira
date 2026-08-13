@@ -141,3 +141,14 @@
     @apply py-2 px-6 bg-primary font-medium text-foreground rounded-full hover:scale-105 transition-transform duration-500;
   }
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
