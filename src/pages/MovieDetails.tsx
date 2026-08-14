@@ -54,14 +54,16 @@ const MovieDetails = () => {
       <section
         className="relative min-h-svh bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${BACKDROP_BASE_URL}${movie?.backdrop_path})`,
+          backgroundImage: movie?.backdrop_path
+            ? `url(${BACKDROP_BASE_URL}${movie.backdrop_path})`
+            : undefined,
         }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40" />
 
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/50 to-transparent" />
 
         {/* back btn */}
         <div className="container relative z-10 pt-12">

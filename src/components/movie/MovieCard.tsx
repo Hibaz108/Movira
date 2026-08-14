@@ -51,7 +51,7 @@ const MovieCard = ({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-card">
+          <div className="w-full h-full flex items-center justify-center text-muted bg-card">
             <p>No poster</p>
           </div>
         )}
