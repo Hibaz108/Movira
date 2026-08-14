@@ -183,3 +183,9 @@ export type TrailerModalProps = {
   handleCloseTrailer: () => void;
   trailer: Video;
 };
+
+export type MovieSectionProps = {
+  title: string;
+  movies: Movie[];
+  linkPath?: string;
+};

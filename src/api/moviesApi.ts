@@ -43,3 +43,15 @@ export const getMovieDetails = (id: number): Promise<MovieDetails> => {
 
   return fetchApi<MovieDetails>(url, "Failed to fetch movie details");
 };
+
+export const getNowPlayingMovies = (): Promise<Movies> => {
+  const url = `${BASE_URL}/movie/now_playing?api_key=${API_KEY}`;
+
+  return fetchApi<Movies>(url, "Failed to fetch now playing movies");
+};
+
+export const getPopularMovies = (): Promise<Movies> => {
+  const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
+
+  return fetchApi<Movies>(url, "Failed to fetch popular movies");
+};
