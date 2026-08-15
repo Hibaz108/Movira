@@ -2,8 +2,9 @@
 import { Link } from "react-router-dom";
 // components
 import Title from "@/components/common/Title";
-import Loader from "@/components/common/Loader";
 import ErrorMessage from "@/components/common/ErrorMessage";
+// shadcn
+import { Skeleton } from "@/components/ui/skeleton";
 // other
 import { genreColors } from "@/lib/genreColors";
 import { useGenres } from "@/hooks/useGenres";
@@ -11,8 +12,30 @@ import { useGenres } from "@/hooks/useGenres";
 const Genres = () => {
   const { data, isLoading, error, refetch } = useGenres();
 
-  if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
+  if (isLoading) {
+    return (
+      <div className="min-h-svh my-4">
+        <div className="container space-y-4">
+          <Skeleton className="h-8 md:h-12 w-1/3 max-w-xl rounded-lg" />
+
+          <Skeleton className="h-4 md:h-6 w-2/3 max-w-xl rounded-lg" />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-3">
+            {Array.from({ length: 16 }).map((_, index) => (
+              <Skeleton key={index} className="w-full h-36 rounded-2xl" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (error)
+    return (
+      <ErrorMessage
+        error={error}
+        onRetry={() => refetch()}
+        variant="fullpage"
+      />
+    );
 
   return (
     <section className="min-h-svh my-4">

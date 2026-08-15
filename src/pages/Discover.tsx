@@ -4,7 +4,7 @@ import DiscoverFiltersDesktop from "@/components/discover/DiscoverFiltersDesktop
 import DiscoverFiltersMobile from "@/components/discover/DiscoverFiltersMobile";
 import DiscoverMovies from "@/components/discover/DiscoverMovies";
 import DiscoverEmptyState from "@/components/discover/DiscoverEmptyState";
-import Loader from "@/components/common/Loader";
+import DiscoverLoading from "@/components/discover/DiscoverLoading";
 import ErrorMessage from "@/components/common/ErrorMessage";
 // icons
 import { Funnel } from "lucide-react";
@@ -39,6 +39,7 @@ const Discover = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isFetchNextPageError,
   } = useDiscover({
     genres: selectedGenreId.join(","),
     sort: selectedSort,
@@ -79,8 +80,16 @@ const Discover = () => {
     setSearchParams({ sort: "popularity.desc" });
   };
 
-  if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
+  if (isLoading) return <DiscoverLoading />;
+
+  if (error)
+    return (
+      <ErrorMessage
+        error={error}
+        onRetry={() => refetch()}
+        variant="fullpage"
+      />
+    );
 
   const genreList = genres ?? [];
 
@@ -118,6 +127,7 @@ const Discover = () => {
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
               isFetchingNextPage={isFetchingNextPage}
+              isFetchNextPageError={isFetchNextPageError}
             />
           )}
           {/* === movies === */}
@@ -166,6 +176,7 @@ const Discover = () => {
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
               isFetchingNextPage={isFetchingNextPage}
+              isFetchNextPageError={isFetchNextPageError}
             />
           )}
         </div>

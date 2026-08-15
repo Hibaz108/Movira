@@ -11,8 +11,9 @@ import TrailerModal from "@/components/common/TrailerModal";
 import CastList from "@/components/movie-details/CastList";
 import ReviewsList from "@/components/movie-details/ReviewsList";
 import RecommendationsList from "@/components/movie-details/RecommendationsList";
-import Loader from "@/components/common/Loader";
+import MovieDetailsLoading from "@/components/movie-details/MovieDetailsLoading";
 import ErrorMessage from "@/components/common/ErrorMessage";
+import NotFound from "@/pages/NotFound";
 // other
 import { BACKDROP_BASE_URL } from "@/constants/constants";
 
@@ -27,6 +28,10 @@ const MovieDetails = () => {
   const reviews = movie?.reviews?.results ?? [];
   const recommendations = movie?.recommendations?.results ?? [];
 
+  if (!Number.isInteger(movieId) || movieId <= 0) {
+    return <NotFound />;
+  }
+
   const trailer =
     videos.find(
       (video) =>
@@ -38,6 +43,14 @@ const MovieDetails = () => {
       (video) => video.site === "YouTube" && video.type === "Trailer",
     );
 
+  const handleBack = () => {
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleShowTrailer = () => {
     setShowTrailer(true);
   };
@@ -46,29 +59,38 @@ const MovieDetails = () => {
     setShowTrailer(false);
   };
 
-  if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
+  if (isLoading) return <MovieDetailsLoading />;
+  if (error)
+    return (
+      <ErrorMessage
+        error={error}
+        onRetry={() => refetch()}
+        variant="fullpage"
+      />
+    );
 
   return (
     <>
       <section
         className="relative min-h-svh bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${BACKDROP_BASE_URL}${movie?.backdrop_path})`,
+          backgroundImage: movie?.backdrop_path
+            ? `url(${BACKDROP_BASE_URL}${movie.backdrop_path})`
+            : undefined,
         }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40" />
 
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/50 to-transparent" />
 
         {/* back btn */}
         <div className="container relative z-10 pt-12">
           <button
             type="button"
             className="flex items-center gap-2 text-primary"
-            onClick={() => navigate(-1)}
+            onClick={handleBack}
           >
             <ArrowLeft className="size-4" aria-hidden="true" /> Back
           </button>

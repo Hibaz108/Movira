@@ -11,6 +11,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Spinner } from "@/components/ui/spinner";
+import { Skeleton } from "@/components/ui/skeleton";
 // hooks
 import { useGenres } from "@/hooks/useGenres";
 import { useDebounce } from "use-debounce";
@@ -18,14 +19,13 @@ import { useSearchMovies } from "@/hooks/useSearch";
 import { useInfiniteScrollTrigger } from "@/hooks/useInfiniteScrollTrigger";
 // components
 import MovieCard from "@/components/movie/MovieCard";
-import Loader from "@/components/common/Loader";
 import ErrorMessage from "@/components/common/ErrorMessage";
 // other
 import { getReleaseYear } from "@/lib/movies";
 
 const Search = () => {
   const { data: genres } = useGenres();
-  const [userQuery, setUserQuery] = useState<string>("");
+  const [userQuery, setUserQuery] = useState("");
   const [debouncedQuery] = useDebounce(userQuery, 600);
   const {
     data,
@@ -35,6 +35,7 @@ const Search = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isFetchNextPageError,
   } = useSearchMovies(debouncedQuery);
   const searchResults = data?.pages.flatMap((page) => page.results) ?? [];
   const loadMoreRef = useInfiniteScrollTrigger(
@@ -46,8 +47,11 @@ const Search = () => {
     <section className="min-h-svh mt-16 mb-6 ">
       <div className="container space-y-3">
         <InputGroup>
+          <label htmlFor="movie-search" className="sr-only">
+            Search for movies
+          </label>
           <InputGroupInput
-            id="inline-start-input"
+            id="movie-search"
             placeholder="Search for movies..."
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
@@ -82,9 +86,24 @@ const Search = () => {
             </div>
           </>
         ) : isLoading ? (
-          <Loader />
+          <div className="mt-10 space-y-4">
+            <Skeleton className="h-8 w-2/3 max-w-xl rounded-lg" />
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {Array.from({ length: 20 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className="w-full aspect-[2/3] rounded-xl"
+                />
+              ))}
+            </div>
+          </div>
         ) : error ? (
-          <ErrorMessage error={error} onRetry={() => refetch()} />
+          <ErrorMessage
+            error={error}
+            onRetry={() => refetch()}
+            variant="fullpage"
+          />
         ) : searchResults.length > 0 ? (
           <>
             <h2 className="mt-10 mb-4 text-2xl text-foreground font-bold font-heading">
@@ -111,6 +130,21 @@ const Search = () => {
                 aria-label="Loading more movies"
               >
                 <Spinner className="size-6" aria-hidden="true" />
+              </div>
+            )}
+
+            {isFetchNextPageError && !isFetchingNextPage && (
+              <div className="flex flex-col items-center gap-2 py-4">
+                <p className="text-center text-muted text-sm">
+                  Couldn't load more movies.
+                </p>
+                <button
+                  type="button"
+                  onClick={fetchNextPage}
+                  className="text-primary text-sm font-medium hover:underline"
+                >
+                  Try again
+                </button>
               </div>
             )}
           </>

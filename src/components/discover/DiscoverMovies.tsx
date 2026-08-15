@@ -1,8 +1,8 @@
 import type { DiscoverMoviesProps } from "@/types/types";
-import MovieCard from "../movie/MovieCard";
+import MovieCard from "@/components/movie/MovieCard";
 import { getReleaseYear } from "@/lib/movies";
 import { useInfiniteScrollTrigger } from "@/hooks/useInfiniteScrollTrigger";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 
 const DiscoverMovies = ({
   movies,
@@ -10,6 +10,7 @@ const DiscoverMovies = ({
   fetchNextPage,
   hasNextPage,
   isFetchingNextPage,
+  isFetchNextPageError,
 }: DiscoverMoviesProps) => {
   const loadMoreRef = useInfiniteScrollTrigger(
     fetchNextPage,
@@ -40,6 +41,21 @@ const DiscoverMovies = ({
           aria-label="Loading more movies"
         >
           <Spinner className="size-6" aria-hidden="true" />
+        </div>
+      )}
+
+      {isFetchNextPageError && !isFetchingNextPage && (
+        <div className="flex flex-col items-center gap-2 py-4">
+          <p className="text-center text-muted text-sm">
+            Couldn't load more movies.
+          </p>
+          <button
+            type="button"
+            onClick={fetchNextPage}
+            className="text-primary text-sm font-medium hover:underline"
+          >
+            Try again
+          </button>
         </div>
       )}
     </div>

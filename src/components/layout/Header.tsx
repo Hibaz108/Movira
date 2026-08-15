@@ -3,7 +3,7 @@ import { useState } from "react";
 // React Router
 import { Link, NavLink } from "react-router-dom";
 // components
-import IconBadgeLink from "../common/IconBadgeLink";
+import IconBadgeLink from "@/components/common/IconBadgeLink";
 // icons
 import {
   Film,
@@ -112,7 +112,6 @@ const Header = () => {
             className={`w-full absolute right-0 top-full z-30 bg-background/95 backdrop-blur-lg overflow-hidden transition-all duration-300 
          ${open ? "h-screen visible opacity-100" : "h-0 invisible opacity-0"}`}
             aria-label="Mobile navigation"
-            aria-hidden={!open}
           >
             <ul className="h-full flex flex-col pt-4 divide-y divide-border font-medium">
               {NAV_LINKS.map((link) => (

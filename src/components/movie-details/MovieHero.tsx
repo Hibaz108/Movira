@@ -135,7 +135,7 @@ const MovieHero = ({ movie, trailer, handleShowTrailer }: MovieHeroProps) => {
         className="flex-2 flex flex-col items-center 
       md:items-start md:justify-center gap-4 text-center md:text-left md:pt-14"
       >
-        <h1 className="text-3xl md:text-5xl font-heading font-bold ">
+        <h1 className="text-3xl md:text-5xl text-white font-heading font-bold ">
           {movie.title}
         </h1>
 
@@ -185,9 +185,9 @@ const MovieHero = ({ movie, trailer, handleShowTrailer }: MovieHeroProps) => {
         {/* overview */}
         <div className="flex flex-col items-center md:items-start mt-6 ">
           <div className="mb-2">
-            <h1 className="text-xl text-foreground font-bold font-heading">
+            <h2 className="text-xl text-white font-bold font-heading">
               Overview
-            </h1>
+            </h2>
             <div className="w-8 h-1 bg-primary rounded-full"></div>
           </div>
           <p className="text-muted">

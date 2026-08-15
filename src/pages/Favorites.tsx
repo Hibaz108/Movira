@@ -3,7 +3,7 @@ import Title from "@/components/common/Title";
 import { useSavedMoviesStore } from "@/store/savedMoviesStore";
 import MovieCard from "@/components/movie/MovieCard";
 import { useGenres } from "@/hooks/useGenres";
-import EmptyState from "@/components/common/ِEmptyState";
+import EmptyState from "@/components/common/EmptyState";
 
 const Favorites = () => {
   const favorites = useSavedMoviesStore((state) => state.favorites);

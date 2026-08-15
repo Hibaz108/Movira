@@ -13,6 +13,8 @@ export type Genre = {
 export type ErrorMessageProps = {
   error?: Error | null;
   onRetry?: () => void;
+  title?: string;
+  variant?: "section" | "fullpage" | "hero";
 };
 
 export type Movie = {
@@ -40,7 +42,7 @@ export type MovieCardProps = {
   releaseYear: string;
   genreIds?: number[];
   genresList: Genre[];
-  className?: string | undefined;
+  className?: string;
 };
 
 export type SavedMovie = {
@@ -83,9 +85,10 @@ export type DiscoverParams = {
 export type DiscoverMoviesProps = {
   genres: Genre[];
   movies: Movie[];
-  fetchNextPage: () => void;
+  fetchNextPage: () => Promise<unknown>;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
+  isFetchNextPageError: boolean;
 };
 
 export type DiscoverEmptyStateProps = {
@@ -182,4 +185,10 @@ export type Language = {
 export type TrailerModalProps = {
   handleCloseTrailer: () => void;
   trailer: Video;
+};
+
+export type MovieSectionProps = {
+  title: string;
+  movies: Movie[];
+  linkPath?: string;
 };

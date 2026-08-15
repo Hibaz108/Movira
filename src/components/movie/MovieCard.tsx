@@ -51,7 +51,7 @@ const MovieCard = ({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-card">
+          <div className="w-full h-full flex items-center justify-center text-muted bg-card">
             <p>No poster</p>
           </div>
         )}
@@ -61,6 +61,7 @@ const MovieCard = ({
         translate-x-1 transition-all duration-300 md:group-hover:opacity-100 md:group-hover:translate-x-0"
         >
           <button
+            type="button"
             className="flex items-center justify-center p-2 bg-black/50 rounded-full text-white"
             aria-label={`Add ${title} to watchlist`}
             onClick={(e) => {
@@ -82,10 +83,12 @@ const MovieCard = ({
             <BookmarkPlus
               className={`size-4 ${isInWatchlist ? "fill-primary stroke-primary" : "fill-transparent"}`}
               strokeWidth={3}
+              aria-hidden="true"
             />
           </button>
 
           <button
+            type="button"
             className="flex items-center justify-center p-2 bg-black/50 rounded-full text-white"
             aria-label={`Add ${title} to favorites`}
             onClick={(e) => {
@@ -107,6 +110,7 @@ const MovieCard = ({
             <Heart
               strokeWidth={3}
               className={`size-4 ${isFavorite ? "fill-primary stroke-primary" : "fill-transparent"}`}
+              aria-hidden="true"
             />
           </button>
         </div>
