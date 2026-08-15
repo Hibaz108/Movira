@@ -10,7 +10,7 @@ import type { MovieSectionProps } from "@/types/types";
 
 const MovieSection = ({ title, movies, linkPath }: MovieSectionProps) => {
   return (
-    <>
+    <div>
       <div className="flex items-center justify-between">
         <Title title={title} />
         {linkPath && (
@@ -24,7 +24,7 @@ const MovieSection = ({ title, movies, linkPath }: MovieSectionProps) => {
         )}
       </div>
       <MovieCarousel movies={movies} />
-    </>
+    </div>
   );
 };
 

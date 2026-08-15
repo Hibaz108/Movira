@@ -1,21 +1,21 @@
 // react router
 import { Routes, Route } from "react-router-dom";
 // components
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 //pages
-import Home from "./pages/Home";
-import Trending from "./pages/Trending";
-import Discover from "./pages/Discover";
-import Genres from "./pages/Genres";
-import Search from "./pages/Search";
-import Favorites from "./pages/Favorites";
-import Watchlist from "./pages/Watchlist";
-import MovieDetails from "./pages/MovieDetails";
-import TopRated from "./pages/TopRated";
-import NotFound from "./pages/NotFound";
+import Home from "@/pages/Home";
+import Trending from "@/pages/Trending";
+import Discover from "@/pages/Discover";
+import Genres from "@/pages/Genres";
+import Search from "@/pages/Search";
+import Favorites from "@/pages/Favorites";
+import Watchlist from "@/pages/Watchlist";
+import MovieDetails from "@/pages/MovieDetails";
+import TopRated from "@/pages/TopRated";
+import NotFound from "@/pages/NotFound";
 // hooks
-import { useTheme } from "./hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 function App() {
   useTheme();

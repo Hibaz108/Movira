@@ -1,5 +1,5 @@
 import { API_KEY, BASE_URL } from "@/constants/constants";
-import { fetchApi } from "./api";
+import { fetchApi } from "@/api/api";
 import type { Movies, MovieDetails } from "@/types/types";
 
 export const searchMovies = (

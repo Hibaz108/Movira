@@ -3,7 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 // hooks
 import { useGenres } from "@/hooks/useGenres";
 // components
-import MovieCard from "./MovieCard";
+import MovieCard from "@/components/movie/MovieCard";
 // icons
 import { ChevronLeft, ChevronRight } from "lucide-react";
 // other
@@ -34,10 +34,9 @@ const MovieCarousel = ({ movies }: { movies: Movie[] }) => {
         onClick={scrollPrev}
         className="
         absolute left-2 top-1/2 -translate-y-1/2 z-10
-        hidden size-10 group-hover/carousel:flex
-        items-center justify-center
+        flex size-10 items-center justify-center
         rounded-full bg-black/60 text-white
-        hover:bg-primary transition"
+        hover:bg-primary transition md:hidden md:group-hover/carousel:flex"
         aria-label="Previous movies"
       >
         <ChevronLeft aria-hidden="true" />
@@ -78,13 +77,12 @@ const MovieCarousel = ({ movies }: { movies: Movie[] }) => {
         onClick={scrollNext}
         className="
         absolute right-2 top-1/2 -translate-y-1/2 z-10
-        hidden size-10 group-hover/carousel:flex
-        items-center justify-center
+        flex size-10 items-center justify-center
         rounded-full bg-black/60 text-white
-        hover:bg-primary transition"
+        hover:bg-primary transition md:hidden md:group-hover/carousel:flex"
         aria-label="Next movies"
       >
-        <ChevronRight aria-hidden="true" />
+        <ChevronRight aria-hidden="true"  />
       </button>
       {/* === right btn === */}
     </div>

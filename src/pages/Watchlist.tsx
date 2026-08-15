@@ -3,7 +3,7 @@ import Title from "@/components/common/Title";
 import { useSavedMoviesStore } from "@/store/savedMoviesStore";
 import MovieCard from "@/components/movie/MovieCard";
 import { useGenres } from "@/hooks/useGenres";
-import EmptyState from "@/components/common/ِEmptyState";
+import EmptyState from "@/components/common/EmptyState";
 
 const Watchlist = () => {
   const watchlist = useSavedMoviesStore((state) => state.watchlist);
@@ -16,7 +16,7 @@ const Watchlist = () => {
           className="size-8 fill-primary stroke-primary"
           aria-hidden="true"
         />
-        <Title title="Favorites" />
+        <Title title="Watchlist" />
 
         <p className="text-muted mt-3">Movies you're planning to watch. </p>
         <p className="mt-3 text-primary text-xs">

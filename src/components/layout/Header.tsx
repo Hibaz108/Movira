@@ -3,7 +3,7 @@ import { useState } from "react";
 // React Router
 import { Link, NavLink } from "react-router-dom";
 // components
-import IconBadgeLink from "../common/IconBadgeLink";
+import IconBadgeLink from "@/components/common/IconBadgeLink";
 // icons
 import {
   Film,

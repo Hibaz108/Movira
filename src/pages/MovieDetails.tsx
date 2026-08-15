@@ -11,8 +11,9 @@ import TrailerModal from "@/components/common/TrailerModal";
 import CastList from "@/components/movie-details/CastList";
 import ReviewsList from "@/components/movie-details/ReviewsList";
 import RecommendationsList from "@/components/movie-details/RecommendationsList";
-import Loader from "@/components/common/Loader";
+import MovieDetailsLoading from "@/components/movie-details/MovieDetailsLoading";
 import ErrorMessage from "@/components/common/ErrorMessage";
+import NotFound from "@/pages/NotFound";
 // other
 import { BACKDROP_BASE_URL } from "@/constants/constants";
 
@@ -27,6 +28,10 @@ const MovieDetails = () => {
   const reviews = movie?.reviews?.results ?? [];
   const recommendations = movie?.recommendations?.results ?? [];
 
+  if (!Number.isInteger(movieId) || movieId <= 0) {
+    return <NotFound />;
+  }
+
   const trailer =
     videos.find(
       (video) =>
@@ -38,6 +43,14 @@ const MovieDetails = () => {
       (video) => video.site === "YouTube" && video.type === "Trailer",
     );
 
+  const handleBack = () => {
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleShowTrailer = () => {
     setShowTrailer(true);
   };
@@ -46,8 +59,15 @@ const MovieDetails = () => {
     setShowTrailer(false);
   };
 
-  if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage error={error} onRetry={() => refetch()} />;
+  if (isLoading) return <MovieDetailsLoading />;
+  if (error)
+    return (
+      <ErrorMessage
+        error={error}
+        onRetry={() => refetch()}
+        variant="fullpage"
+      />
+    );
 
   return (
     <>
@@ -70,7 +90,7 @@ const MovieDetails = () => {
           <button
             type="button"
             className="flex items-center gap-2 text-primary"
-            onClick={() => navigate(-1)}
+            onClick={handleBack}
           >
             <ArrowLeft className="size-4" aria-hidden="true" /> Back
           </button>
